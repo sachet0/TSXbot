@@ -16,7 +16,7 @@ async def on_ready():
 
 
 @bot.command(pass_context=True)
-async def gib(ctx, arg):
+async def gib(ctx, arg=""):
     """Usuage: $gib *ticker symbol*
     \nFor US stocks, Please add :US after the ticker. For example for TSLA (Tesla Inc), it would be TSLA:US
     \nNote: All prices are in CAD$"""
@@ -24,6 +24,9 @@ async def gib(ctx, arg):
     ticker = arg.upper()
     price = calculate(ticker)
     imgUrl = getImg(ticker, '5d')
+
+    if arg == "":
+        return await ctx.send("Error.You didn't enter the ticker symbol. Please try again")
 
     await ctx.send(price)
     async with aiohttp.ClientSession() as session:
@@ -39,10 +42,13 @@ async def hello(ctx):
 
 
 @bot.command(pass_context=True)
-async def chart(ctx, ticker, duration):
+async def chart(ctx, ticker, duration=""):
     """Usuage: $chart *ticker symbol* *duration*
     duration can be either of these; 1d, 2d, 3d, 4d, 5d, 1m, 3m, 6m, 1y
     """
+    if duration == "":
+        return await ctx.send('Error. Please try again, you missed the duration.')
+
     imgUrl = getImg(ticker, duration)
     async with aiohttp.ClientSession() as session:
         async with session.get(imgUrl) as resp:
