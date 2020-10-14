@@ -6,4 +6,4 @@ A simple discord bot that scrapes the TSX (Toronto Stock Exchange) website and p
 * bs4 (BeautifulSoup4)
 * requests
 
-To install the dependencies, type `pip install discord.py bs4 requests` in the terminal/powershell
+To install the dependencies, type `pip install discord.py bs4 requests lxml` in the terminal/powershell
