@@ -8,7 +8,7 @@ import aiohttp
 import time
 
 bot = commands.Bot(command_prefix='$', case_insensitive=True)
-TOKEN = 'NjQyNTM4NzAxNzgzODI2NDQ5.XuJyAQ.gSpE6gr7EyvejZuQpZH57GNjiws'
+TOKEN = 'ENTER YOUR TOKEN'
 
 @bot.event
 async def on_ready():
