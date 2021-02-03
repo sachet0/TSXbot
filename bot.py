@@ -7,7 +7,7 @@ import time
 import random
 
 bot = commands.Bot(command_prefix='$', case_insensitive=True)
-TOKEN = 'ODAwNTQwMTI0NjI5OTU4Njk0.YATnFw.gDvM_UFttr4UmYOB757UTceZpBc'
+TOKEN = 'ENTER YOUR BOT TOKEN HERE'
 
 
 @bot.event
