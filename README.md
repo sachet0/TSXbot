@@ -1,9 +1,9 @@
-# TSX bot
-A simple discord bot that scrapes the TSX (Toronto Stock Exchange) website and parses through the html data to get various Key Data for the Stock thats chosen. 
+# TSX bot 2.0
+Scraping function was broken due to the change in Toronto Stock Exchange website. Now it only has chart function to show chart of the stock and the user can choose the time duration. 
 
 ## Dependencies
 * discord.py
-* bs4 (BeautifulSoup4)
 * requests
+* aiohttp
 
-To install the dependencies, type `pip install discord.py bs4 requests` in the terminal/powershell
+To install the dependencies, type `pip install discord.py requests aiohttp` in the terminal/powershell
