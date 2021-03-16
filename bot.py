@@ -52,13 +52,23 @@ async def chart(ctx, ticker, duration=""):
     if duration == "":
         return await ctx.send('Error. Please try again, you missed the duration.')
 
-    imgUrl = getImg(ticker, duration)
-    async with aiohttp.ClientSession() as session:
-        async with session.get(imgUrl) as resp:
-            if resp.status != 200:
-                return await ctx.send('Could not download file...')
-            data = io.BytesIO(await resp.read())
-            await ctx.send(file=discord.File(data, 'output.png'))
+    crypto = False
+
+    if ticker.lower() in ['eos', 'eth', 'trx', 'xmr', 'ada', 'miota', 'btc', 'bch', 'bnb', 'bsv', 'xlm', 'xrp', 'doge', 'link', 'ltc', 'usdt']:
+        imgUrl = getCrypt(ticker, duration)
+        crypto = True
+    else:
+        imgUrl = getImg(ticker, duration)
+        crypto = False
+
+    if crypto: await ctx.send(imgUrl)
+    else:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(imgUrl) as resp:
+                if resp.status != 200:
+                    return await ctx.send('Could not download file...')
+                data = io.BytesIO(await resp.read())                
+                await ctx.send(file=discord.File(data, 'output.png'))
 
 
 def getImg(ticker, duration):
@@ -69,6 +79,27 @@ def getImg(ticker, duration):
     imgH = 420
 
     imgURL = f'https://app.quotemedia.com/quotetools/getChart?webmasterId=101020&snap=true&symbol={ticker}&chscale={duration.lower()}&chtype=line&chwid={imgW}&chhig={imgH}&chmrg=0&chfrmon=off&chton={label}&chlgdon=off&ch52on=on&chgrd=D8DCE5&chbdr=D8DCE5&chln=313942&chaaon=true&locale=en'
+    return imgURL
+
+
+def getCrypt(symbol, duration):
+    day = 0
+    month = 0
+    year = 0
+    if duration[-1] == 'm':
+        if month <= 12:
+            month == duration[:-1]
+        else: month = 1
+        day, year = 0, 0
+    elif duration[-1] == 'd':
+        day = duration[:-1]
+        month, year = 0, 0
+    elif duration[-1] == 'y':
+        year = duration[:-1]
+        day, month = 0, 0
+    
+    imgURL = f'https://stockcharts.com/c-sc/sc?s=%24{symbol.upper()}USD&p=D&yr={year}&mn={month}&dy={day}&i=t5756256453c&r=1613273314377'
+
     return imgURL
 
 
