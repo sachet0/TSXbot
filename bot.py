@@ -36,6 +36,16 @@ async def over(ctx):
     num = random.randint(0, len(gifList)-1)
     await ctx.send(gifList[num])
 
+@bot.command(pass_context=True)
+async def notover(ctx):
+    """Its not over ....yet"""
+    picList = ["https://cdn.discordapp.com/attachments/763502730944708609/807264573526507580/1612450606507.png",
+               "https://media.discordapp.net/attachments/763502730944708609/821198972114698270/1H8TK1BK5H12X65M8OL0nUQ.png",
+               "https://tenor.com/view/pepe-pepe-drinking-pepe-smoking-pepe-good-time-high-class-pepe-gif-18134121",
+               "https://media.discordapp.net/attachments/763502730944708609/807264638021533696/image0.png",
+               "https://cdn.discordapp.com/attachments/763502730944708609/821727654801309736/BLOOM.gif"]
+    index = random.randint(0, len(picList)-1)
+    await ctx.send(picList[index])
 
 @bot.command(pass_context=True)
 async def bog(ctx):
